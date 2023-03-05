@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Employee List</h2>
+    <a href="/new-employee">Add Employee</a>
+</div>
+
+<table>
+    <tr>
+        <td>First</td>
+        <td>Last</td>
+        <td>Pay</td>
+    </tr>
+
+    {% for employee in employees %}
+    <tr class="employee-row">
+        <td>{{ employee[0] }}</td>
+        <td>{{ employee[1] }}</td>
+        <td>{{ employee[2] }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}
