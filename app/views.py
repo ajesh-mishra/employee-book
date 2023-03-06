@@ -3,6 +3,7 @@ from app.db import employee_db
 
 views = Blueprint('view', __name__)
 
+
 @views.route('/home', methods=['GET', 'POST'])
 def home():
     # return '<h1>Views Page<h1>'
@@ -26,8 +27,8 @@ def new_employee():
         elif int(pay) < 1_000:
             flash('Pay cannot be less than 1000', 'error')
         else:
-            query_string='''INSERT INTO employees VALUES (:first, :last, :pay)'''
-            data={'first': first, 'last': last, 'pay': pay}
+            query_string = '''INSERT INTO employees VALUES (:first, :last, :pay)'''
+            data = {'first': first, 'last': last, 'pay': pay}
             employee_db(query_string, data)
 
             flash('Employee Added!', 'success')

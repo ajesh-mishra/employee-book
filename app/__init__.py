@@ -1,8 +1,8 @@
 from flask import Flask
-import sqlite3
 
 from app.views import views
 from app.auth import auth
+
 
 def create_app():
     app = Flask(__name__)

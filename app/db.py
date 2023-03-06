@@ -14,9 +14,9 @@ def query(query_string=None, data=None):
     else:
         cursor.execute('''SELECT * FROM users''')
     
-    users = cursor.fetchall()
+    users_fetched = cursor.fetchall()
     conn.close()
-    return users
+    return users_fetched
 
 
 def employee_db(query_string=None, data=None):
@@ -59,8 +59,6 @@ if __name__ == '__main__':
     # conn = sqlite3.connect('employee.db')
     # cursor = conn.cursor()
 
-    
-            
     # email = 'ajesh@email.com'
     # password = '1234'
 

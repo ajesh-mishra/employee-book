@@ -36,12 +36,12 @@ def sign_up():
         if not matches:
             flash('Invalid Email ID', 'error')
         elif len(password1) < 4:
-            flash('Password Should be atleast 4 chars long', 'error')
+            flash('Password Should be at least 4 chars long', 'error')
         elif password1 != password2:
             flash('Passwords don\'t match', 'error')
         else:
-            query_string='''INSERT INTO users VALUES (:email, :password)'''
-            data={'email': email, 'password': password1}
+            query_string = '''INSERT INTO users VALUES (:email, :password)'''
+            data = {'email': email, 'password': password1}
             query(query_string, data)
 
             flash('Account Created!', 'success')
