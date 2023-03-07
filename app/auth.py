@@ -1,18 +1,22 @@
-from flask import Blueprint, render_template, request, redirect, flash
-from app.db import query
+from flask import Blueprint, render_template, request, redirect, flash, Response
+from typing import Optional, List, Any, Pattern, Dict
+from app.db import query_users
 import re
 
-auth = Blueprint('auth', __name__)
+auth: Blueprint = Blueprint('auth', __name__)
 
 
 @auth.route('/', methods=['GET', 'POST'])
-def login():
+def login() -> str | Response:
+    """
+    Login Page for the application
+    """
     if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
-        users = query('''SELECT * FROM users WHERE email = :email''', {'email': email})
+        email: Optional[str] = request.form.get('email')
+        password: Optional[str] = request.form.get('password')
+        users: List[Any] = query_users('''SELECT * FROM users WHERE email = :email''', {'email': email})
 
-        if len(users) != 1:
+        if len(users) < 1:
             flash('Incorrect Email', 'error')
         elif users[0][1] != password:
             flash('Incorrect Password', 'error')
@@ -24,14 +28,17 @@ def login():
 
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
-def sign_up():
+def sign_up() -> str | Response:
+    """
+    Sign-up Page for the application
+    """
     if request.method == 'POST':
-        email = request.form.get('email')
-        password1 = request.form.get('password1')
-        password2 = request.form.get('password2')
+        email: Optional[str] = request.form.get('email')
+        password1: Optional[str] = request.form.get('password1')
+        password2: Optional[str] = request.form.get('password2')
 
-        pattern = re.compile(r'^\w+[-.]?\w+@\w+\.\w+$')
-        matches = pattern.findall(email)
+        pattern: Pattern[str] = re.compile(r'^\w+[-.]?\w+@\w+\.\w+$')
+        matches: List[Any] = pattern.findall(email)
         
         if not matches:
             flash('Invalid Email ID', 'error')
@@ -40,9 +47,9 @@ def sign_up():
         elif password1 != password2:
             flash('Passwords don\'t match', 'error')
         else:
-            query_string = '''INSERT INTO users VALUES (:email, :password)'''
-            data = {'email': email, 'password': password1}
-            query(query_string, data)
+            query_string: str = '''INSERT INTO users VALUES (:email, :password)'''
+            data: Dict = {'email': email, 'password': password1}
+            query_users(query_string, data)
 
             flash('Account Created!', 'success')
             return redirect('/')
