@@ -4,24 +4,30 @@
 
 {% block content %}
 <div class="page-header">
-    <h2>Employee List</h2>
-    <a href="/new-employee"> ➕ Add Employee</a>
+  <h2>Employee List</h2>
+  <a href="/add-update-employee"> ➕ Add Employee</a>
 </div>
 
 <table>
-    <tr>
-        <td>First</td>
-        <td>Last</td>
-        <td>Pay</td>
-    </tr>
+  <tr>
+    <td>ID</td>
+    <td>First</td>
+    <td>Last</td>
+    <td>Pay</td>
+    <td>Action</td>
+  </tr>
 
-    {% for employee in employees %}
+  {% for employee in employees %}
     <tr class="employee-row">
-        <td>{{ employee[0] }}</td>
-        <td>{{ employee[1] }}</td>
-        <td>{{ employee[2] }}</td>
+      <td>{{ employee[0] }}</td>
+      <td>{{ employee[1] }}</td>
+      <td>{{ employee[2] }}</td>
+      <td>{{ employee[3] }}</td>
+      <td>
+        <a href="/show-employee?id={{ employee[0] }}">Show</a>
+      </td>
     </tr>
-    {% endfor %}
+  {% endfor %}
 
 </table>
 {% endblock %}

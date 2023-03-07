@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+  <h2><a href="/home">← Home</a></h2>
+
+  <div class="emp-detail">
+    <h2>{{ employee[1] }} {{ employee[2] }}</h2>
+    <p>Employee name is {{ employee[1] }} {{ employee[2] }} and the pay is {{ employee[3] }}.</p>
+  </div>
+
+    <a href="/delete-employee?id={{ employee[0] }}">Delete</a>
+    <a href="/add-update-employee?id={{ employee[0] }}">Edit</a>
+{% endblock %}

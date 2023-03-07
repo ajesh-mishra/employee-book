@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, flash, Response
+from flask import Blueprint, render_template, request, redirect, flash
 from typing import Optional, List, Any, Pattern, Dict
-from app.db import query_users
+from werkzeug import Response
 import re
+from app.db import query_users
 
 auth: Blueprint = Blueprint('auth', __name__)
 

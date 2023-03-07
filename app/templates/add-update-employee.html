@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+  <h2><a href="/home">← Home</a></h2>
+
+  <form method="POST">
+    <div class="employee-form">
+      <div class="hidden">
+        <label for="id">ID</label>
+        <input
+          value="{{ employee.get('id') }}"
+          type="text" id="id"
+          name="id" />
+      </div>
+      <div class="field">
+        <label for="id2">ID</label>
+        <input
+          disabled
+          value="{{ employee.get('id') }}"
+          type="text" id="id2"
+          name="id2" />
+      </div>
+      <div class="field">
+        <label for="first">First Name</label>
+        <input
+          value="{{ employee.get('first', '') }}"
+          type="text" id="first"
+          name="first" placeholder="Enter Employee First Name" />
+      </div>
+      <div class="field">
+        <label for="first">Last Name</label>
+        <input
+          value="{{ employee.get('last', '') }}"
+          type="text" id="last"
+          name="last" placeholder="Enter Employee Last Name" />
+      </div>
+      <div class="field">
+        <label for="pay">Pay</label>
+        <input
+          value="{{ employee.get('pay', '') }}"
+          type="number" id="pay"
+          name="pay" placeholder="Enter Pay" />
+      </div>
+    </div>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}

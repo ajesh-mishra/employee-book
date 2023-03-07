@@ -1,5 +1,5 @@
 from sqlite3 import Cursor, Connection
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Tuple
 
 
 def query_users(query_string: str = None, data: Dict[str, Any] = None, create_table: bool = False) -> List:
@@ -27,7 +27,7 @@ def query_users(query_string: str = None, data: Dict[str, Any] = None, create_ta
     return users_fetched
 
 
-def query_employee(query_string: str = None, data: Dict[str, Any] = None, create_table: bool = False) -> List:
+def query_employee(query_string: str = None, data: Tuple | Dict = None, create_table: bool = False) -> List:
     """
     Queries employees table and returns a List of employees
     """
@@ -37,6 +37,7 @@ def query_employee(query_string: str = None, data: Dict[str, Any] = None, create
 
     if create_table:
         cursor.execute('''CREATE TABLE employees (
+            id integer PRIMARY KEY,
             first text,
             last text,
             pay integer
@@ -58,19 +59,25 @@ if __name__ == '__main__':
     User Table
     """
     # query = '''INSERT INTO users VALUES (:email, :password)'''
-    # data = {'email': 'admin@email.com', 'password': '1234'}
+    # data = {'email': 'ajesh@email.com', 'password': '1234'}
     # users = query_users()
     # print(users)
 
     """
     Employee Table
     """
-    # first: str = 'Rajesh'
-    # last: str = 'Mishra'
-    # pay: int = 60_000
-    #
-    # query: str = '''INSERT INTO employees VALUES (:first, :last, :pay)'''
-    # data: Dict[str, str | int] = {'first': first, 'last': last, 'pay': pay}
-    #
-    # employees = query_employee()
-    # print(employees)
+    # query: str = '''INSERT INTO employees(first, last, pay) VALUES (?, ?, ?)'''
+    # data: Tuple[str, str, int] = ('Ajesh', 'Mishra', 50_000)
+
+    # query: str = '''INSERT INTO employees VALUES (:id, :first, :last, :pay)'''
+    # data: Dict[str, int | str] = {'id': None, 'first': 'Sam', 'last': 'Smith', 'pay': 50_000}
+
+    query: str = '''UPDATE employees SET first = :first, last = :last, pay = :pay WHERE id = :id'''
+    data: Dict[str, int | str] = {'id': 5, 'first': 'Sam', 'last': 'Smith', 'pay': 51_000}
+
+    # emp_id = 3
+    # query_string = '''SELECT * FROM employees WHERE id = :id'''
+    # employee = query_employee(query_string, {'id': int(emp_id)})
+
+    employees = query_employee()
+    print(employees)

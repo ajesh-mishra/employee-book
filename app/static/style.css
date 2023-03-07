@@ -72,13 +72,23 @@ tr:nth-child(1) {
 
 td, th {
     border-bottom: 1px solid rgba(0, 0, 0, 0.078);
-    width: 200px;
+    width: 150px;
     padding: 0.5rem 1rem;
 }
 
 .page-header {
     display: flex;
     align-items: center;
-    gap: 25rem;
+    gap: 38rem;
     height: 4rem;
+}
+
+.emp-detail {
+    background: ghostwhite;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.hidden {
+    display: none;
 }
