@@ -21,7 +21,7 @@ def query_users(query_string: str = None, data: Dict[str, Any] = None, create_ta
             cursor.execute(query_string, data)
     else:
         cursor.execute('''SELECT * FROM users''')
-    
+
     users_fetched: List[Any] = cursor.fetchall()
     conn.close()
     return users_fetched
@@ -48,7 +48,7 @@ def query_employee(query_string: str = None, data: Tuple | Dict = None, create_t
             cursor.execute(query_string, data)
     else:
         cursor.execute('''SELECT * FROM employees''')
-        
+
     employees: List[Any] = cursor.fetchall()
     conn.close()
     return employees

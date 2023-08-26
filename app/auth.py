@@ -1,7 +1,9 @@
-from flask import Blueprint, render_template, request, redirect, flash
-from typing import Optional, List, Any, Pattern, Dict
-from werkzeug import Response
 import re
+from typing import Optional, List, Any, Pattern, Dict
+
+from flask import Blueprint, render_template, request, redirect, flash
+from werkzeug import Response
+
 from app.db import query_users
 
 auth: Blueprint = Blueprint('auth', __name__)
@@ -24,7 +26,7 @@ def login() -> str | Response:
         else:
             flash(f'Welcome {email}', 'success')
             return redirect('/home')
-    
+
     return render_template('login.html')
 
 
@@ -40,7 +42,7 @@ def sign_up() -> str | Response:
 
         pattern: Pattern[str] = re.compile(r'^\w+[-.]?\w+@\w+\.\w+$')
         matches: List[Any] = pattern.findall(email)
-        
+
         if not matches:
             flash('Invalid Email ID', 'error')
         elif len(password1) < 4:

@@ -1,6 +1,8 @@
-from flask import Blueprint, render_template, request, flash, redirect
 from typing import List, Any, Optional, Dict
+
+from flask import Blueprint, render_template, request, flash, redirect
 from werkzeug import Response
+
 from app.db import query_employee
 
 views = Blueprint('view', __name__)
